@@ -9,6 +9,12 @@ class Continent
 
 	def initialize(name)
 		@name = name
+		@countries = {}
+		@@continents[self] = []
+	end
+
+	def self.all
+		@@continents
 	end
 
 end # End of Class
