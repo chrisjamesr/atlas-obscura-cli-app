@@ -1,6 +1,10 @@
+require 'nokogiri'
+require 'open-uri'
+
 require_relative './atlas_obscura_cli_app/version'
 require_relative './atlas_obscura_cli_app/cli'
 require_relative './continent'
+require_relative './country'
 
 class AtlasObscuraCliApp::Scraper
 
@@ -11,8 +15,18 @@ class AtlasObscuraCliApp::Scraper
 	def self.scrape_continents
 		atlas = Nokogiri::HTML(open('http://www.atlasobscura.com/destinations'))
 		atlas.css('ul.global-region-list li.global-region-item').search('h2').collect do |c|
-			Continent.new(c.text.strip.to_sym)
+			Continent.new(c.text.strip)
 		end
 	end
 
+	def self.scrape_countries(continent)
+		atlas = Nokogiri::HTML(open('http://www.atlasobscura.com/destinations'))
+		atlas.css('ul.global-region-list li.global-region-item #africa-children').search('a').collect do |c| 
+			Country.new(c.text.strip, continent)
+		end
+	end
+
+	def self.scrape_destinations
+	end
 end # End of Class
+

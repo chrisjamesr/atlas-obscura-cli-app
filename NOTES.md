@@ -14,16 +14,24 @@ create destinations object
 select destination
 
 
-
+continents
 url = 'http://www.atlasobscura.com/destinations'
 
 atlas = Nokogiri::HTML(open(url))
 
-atlas.css('ul.global-region-list li.global-region-item').search('h2').text
-
-
+continent = atlas.css('ul.global-region-list li.global-region-item').search('h2').text
  places.each{|a| a.search('h2').text}
 
+countries
+
+continent.css(.collapsible.js-toggle.js-global-region.toggle .drawer-content-wrap .country-links .baseline-near .js-row-member).search('a')
+
+ atlas.css('ul.global-region-list li.global-region-item').search('a').each { |a| puts a.text}
+
+atlas.css("ul.global-region-list li.global-region-item #asia-children").first.search('a').each{|a| puts a.text}
+
+
+data scructure
  continents = {
  	:africa => {
 		:name => name,
