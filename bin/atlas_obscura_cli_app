@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+
+require './lib/atlas_obscura_cli_app'
+
+AtlasObscuraCliApp::CLI.new.call
