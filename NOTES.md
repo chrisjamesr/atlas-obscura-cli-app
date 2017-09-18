@@ -30,6 +30,47 @@ continent.css(.collapsible.js-toggle.js-global-region.toggle .drawer-content-wra
 
 atlas.css("ul.global-region-list li.global-region-item #asia-children").first.search('a').each{|a| puts a.text}
 
+destinations
+
+ city/link
+  nodes = atlas.css('.geos #page-content .container section.geo-places .index-card-wrap')
+
+  link = nodes.search('a.content-card-place').each {|c| puts c.attribute('href').value}
+
+  blurb = nodes.search('a .content-card-subtitle').each {|c| puts c.text}
+
+  lat_lng = nodes.search('a .lat-lng').each {|c| puts c.text.strip}
+
+  country = nodes.search('.content-card-footer-container')
+  .each {|c| c.children[-2]attribute('data-place-country').value}
+
+  (city,country)
+  city = nodes.search('a .content-card-text .place-card-location').each {|c| puts c.text}
+ 
+  attraction = nodes.search('a h3.content-card-title span').each {|c| puts c.text} 
+
+
+
+
+
+atlas.css('.page content .container section.geo-places a.content-card-place').attribute('href').value
+
+city = atlas.css('.page content .container section.geo-places a.content-card-place .content-card-text').search('place-card-location').text
+
+attraction = atlas.css('.content-card-text').search('h3.content-card-title span').text
+
+blurb = city.search('.content-card-subtitle')
+
+geo = atlas.css('.content-card-text').search('.lat-lng') 
+
+
+
+destination text
+
+'.page-content article.place-content #place-container .content-body').search('p').text
+
+
+
 
 data scructure
  continents = {
