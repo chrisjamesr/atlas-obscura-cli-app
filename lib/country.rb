@@ -6,8 +6,8 @@ class Country
 	def initialize(name, continent)
 		@name = name
 		@continent = continent
-		@cities = {}
-		@destinations = []
+		@cities = []
+		# @destinations = []
 		@@countries << self
 		self.continent.countries << self
 
