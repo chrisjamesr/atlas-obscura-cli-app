@@ -21,7 +21,8 @@ class AtlasObscuraCliApp::Scraper
 
 	def self.scrape_countries(continent)
 		atlas = Nokogiri::HTML(open('http://www.atlasobscura.com/destinations'))
-		atlas.css('ul.global-region-list li.global-region-item #africa-children').search('a').collect do |c| 
+		atlas.css("ul.global-region-list li.global-region-item div[id^=\"#{continent.name.downcase}\"]").search('a').collect do |c| 
+			# doc.css('span[class="#{k}"]')
 			Country.new(c.text.strip, continent)
 		end
 	end
