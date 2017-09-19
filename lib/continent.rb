@@ -19,7 +19,6 @@ class Continent
 	def self.all
 		@@continents
 	end
-
 	
 
 	def self.clear_all

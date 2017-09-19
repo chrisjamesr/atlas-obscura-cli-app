@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+require 'pry'
 
 require_relative './atlas_obscura_cli_app/version'
 require_relative './atlas_obscura_cli_app/cli'
@@ -11,23 +12,41 @@ class AtlasObscuraCliApp::Scraper
 	def initialize()
 	end
 
-	# returns hash of continents on site
+	# returns array of continents on site
 	def self.scrape_continents
 		atlas = Nokogiri::HTML(open('http://www.atlasobscura.com/destinations'))
 		atlas.css('ul.global-region-list li.global-region-item').search('h2').collect do |c|
 			Continent.new(c.text.strip)
 		end
 	end
-
+	# returns array of countries
 	def self.scrape_countries(continent)
 		atlas = Nokogiri::HTML(open('http://www.atlasobscura.com/destinations'))
 		atlas.css("ul.global-region-list li.global-region-item div[id^=\"#{continent.name.downcase}\"]").search('a').collect do |c| 
-			# doc.css('span[class="#{k}"]')
 			Country.new(c.text.strip, continent)
 		end
 	end
 
-	def self.scrape_destinations
+	def self.scrape_destinations(country)
+		info = {name: "", link: "", summary: "", city: "", lat_lng: "", country:"", continent:""}
+		atlas = Nokogiri::HTML(open(country.url))
+		destinations = atlas.css('.geos #page-content .container section.geo-places .index-card-wrap')
+		destinations.each do |dest|
+			binding.pry
+			info.each do
+				info[:name] = dest.search('a h3.content-card-title span').text
+				info[:link] = dest.search('a.content-card-place').attribute('href').value
+				info[:summary] = dest.search('a .content-card-subtitle').text
+				info[:city] = dest.search('a .content-card-text .place-card-location').sub(", #{country.name}")
+				info[:lat_lng] = dest.search('a .lat-lng').text.strip
+				info[:country] = self
+				info[:continent] = self.continent
+			end
+			binding.pry
+			Destination.new(info)
+		end
+		# atlas.each do {|a| Destination.new(a)}
 	end
+
 end # End of Class
 

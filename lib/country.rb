@@ -1,5 +1,5 @@
 class Country
-	attr_accessor :name, :continent, :cities, ,:url, :destinations
+	attr_accessor :name, :continent, :cities, :url, :destinations
 
 	@@countries = []
 
@@ -7,7 +7,7 @@ class Country
 		@name = name
 		@continent = continent
 		@cities = []
-		# @destinations = []
+		@destinations = {}
 		@@countries << self
 		self.continent.countries << self
 
@@ -22,7 +22,7 @@ class Country
 	end
 
 	def url
-		@url = 'http://www.atlasobscura.com/things-to-do/#{self.name}/places' 
+		@url = "http://www.atlasobscura.com/things-to-do/#{self.name}/places"
 	end
 
 

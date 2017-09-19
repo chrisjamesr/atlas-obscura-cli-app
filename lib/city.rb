@@ -5,10 +5,12 @@ class City
 		@name = name
 		@country = country
 		self.country.add_city(self)
-		@destinations = []
+		@destinations = []		
 	end
 
-	def destinations 
+	def add_destinations(array)
+		@destinations
+	end	
 
 
 
