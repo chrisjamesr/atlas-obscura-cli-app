@@ -6,6 +6,7 @@ require_relative './atlas_obscura_cli_app/version'
 require_relative './atlas_obscura_cli_app/cli'
 require_relative './continent'
 require_relative './country'
+require_relative './destination'
 
 class AtlasObscuraCliApp::Scraper
 
@@ -32,15 +33,15 @@ class AtlasObscuraCliApp::Scraper
 		atlas = Nokogiri::HTML(open(country.url))
 		destinations = atlas.css('.geos #page-content .container section.geo-places .index-card-wrap')
 		destinations.each do |dest|
-			binding.pry
+			# binding.pry
 			info.each do
 				info[:name] = dest.search('a h3.content-card-title span').text
 				info[:link] = dest.search('a.content-card-place').attribute('href').value
 				info[:summary] = dest.search('a .content-card-subtitle').text
-				info[:city] = dest.search('a .content-card-text .place-card-location').sub(", #{country.name}")
+				info[:city] = dest.search('a .content-card-text .place-card-location').text # create def name=() to format city name
 				info[:lat_lng] = dest.search('a .lat-lng').text.strip
-				info[:country] = self
-				info[:continent] = self.continent
+				info[:country] = country
+				info[:continent] = country.continent
 			end
 			binding.pry
 			Destination.new(info)
