@@ -22,20 +22,21 @@ class AtlasObscuraCliApp::Scraper
 	def self.scrape_destinations(country)
 		info = {name: "", link: "", summary: "", city: "", lat_lng: "", country:"", continent:""}
 		atlas = Nokogiri::HTML(open(country.url))
-		destinations = atlas.css('.geos #page-content .container section.geo-places .index-card-wrap').pop
-			binding.pry	
-		destinations.each do |dest|
+		destinations = atlas.css('.geos #page-content .container section.geo-places .index-card-wrap')
+		destinations.select do |dest|
 			# binding.pry
-			info.each do
-				info[:name] = dest.search('a h3.content-card-title span').text
-				info[:link] = dest.search('a.content-card-place').attribute('href').value
-				info[:summary] = dest.search('a .content-card-subtitle').text
-				info[:city] = dest.search('a .content-card-text .place-card-location').text # create def name=() to format city name
-				info[:lat_lng] = dest.search('a .lat-lng').text.strip
-				info[:country] = country
-				info[:continent] = country.continent
+			if !dest.values.include?("index-card-wrap geo-tile-cta")
+				info.each do
+					info[:name] = dest.search('a h3.content-card-title span').text
+					info[:link] = dest.search('a.content-card-place').attribute('href').value
+					info[:summary] = dest.search('a .content-card-subtitle').text
+					info[:city] = dest.search('a .content-card-text .place-card-location').text # create def name=() to format city name
+					info[:lat_lng] = dest.search('a .lat-lng').text.strip
+					info[:country] = country
+					info[:continent] = country.continent
+				end
 			end
-			binding.pry
+	
 			Destination.new(info)
 		end
 		# atlas.each do {|a| Destination.new(a)}
