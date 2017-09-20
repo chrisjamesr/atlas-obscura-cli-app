@@ -1,12 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
-require 'pry'
-
-require_relative './atlas_obscura_cli_app/version'
-require_relative './atlas_obscura_cli_app/cli'
-require_relative './continent'
-require_relative './country'
-require_relative './destination'
 
 class AtlasObscuraCliApp::Scraper
 
@@ -32,9 +23,9 @@ class AtlasObscuraCliApp::Scraper
 		info = {name: "", link: "", summary: "", city: "", lat_lng: "", country:"", continent:""}
 		atlas = Nokogiri::HTML(open(country.url))
 		destinations = atlas.css('.geos #page-content .container section.geo-places .index-card-wrap').pop
+			binding.pry	
 		destinations.each do |dest|
 			# binding.pry
-			dest.pop
 			info.each do
 				info[:name] = dest.search('a h3.content-card-title span').text
 				info[:link] = dest.search('a.content-card-place').attribute('href').value

@@ -1,8 +1,3 @@
-require 'nokogiri'
-require 'open-uri'
-require 'pry'
-
-
 class Continent
 
 	attr_accessor :countries, :name
