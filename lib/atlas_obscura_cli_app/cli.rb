@@ -1,9 +1,10 @@
 class AtlasObscuraCliApp::CLI
-	attr_accessor :continents
+	attr_accessor :continents, :countries
 
 	def initialize
 		@continents = []
 	end
+
 	def call
 		list_continents
 		menu
@@ -17,48 +18,24 @@ class AtlasObscuraCliApp::CLI
 			puts "#{index+1}.  #{c.name}"
 			self.continents << c     
 		end
+		binding.pry
 	end
 
 
 	def menu
 		puts "\n"
-		puts "Enter the continent (or number) you would like to search, list to relist, or exit", "\n"
+		puts "Enter a number for the continent you would like to search, list to relist, or exit", "\n"
 		input = gets.strip
-		
+		if input.slice(/\A\d*/).strip.to_i.eql?(0) || input.slice(/\A\d*/).strip.to_i > self.continents.count + 1  
+			menu
+		else 
+			index = input.slice(/\A\d*/).strip.to_i - 1
+			self.country = self.continents[index].name
 
-		while input != "exit"
-			case input = gets.strip
-			when "1"
-				puts "more info on 1"
-			when "2"
-				puts "more info on 2"
-			when "3"
-				puts "more info on 3"
-			when "4"
-				puts "more info on 4"
-			when "5"
-				puts "more info on 5"
-			when "6"
-				puts "more info on 6"
-			when "7"
-				puts "more info on 7"
-			when "8"
-				puts "more info on 8"
-			when "9"
-				puts "more info on 9"
-			when "10"
-				puts "more info on 10"
-			when "11"
-				puts "more info on 11"	
-			when "list"
-				list_continents
-			else
-				puts "not sure what you're looking for, type list"	
-			end
-		end
-	end
 
 	def list_countries(continent)
+		
+	end
 
 
 	def goodbye
