@@ -1,7 +1,7 @@
 
 class Destination
-	attr_accessor :name, :link, :summary, :city, :lat_lng
-	attr_reader :country, :continent
+	attr_accessor :name, :link, :summary, :lat_lng
+	attr_writer :country, :continent, :city
 	# {name: "", link: "", summary: "", city: "", lat_lng: "", country: self}
 	@@destinations = []
 	
@@ -21,6 +21,10 @@ class Destination
 	def continent_name
 		self.continent.name
 	end		
+
+	def city
+		@city.sub("#{country.name}", "")
+	end
 
 	
 end  # End of Class

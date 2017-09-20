@@ -1,32 +1,31 @@
-#CLI Controller
 class AtlasObscuraCliApp::CLI
+	attr_accessor :continents
 
+	def initialize
+		@continents = []
+	end
 	def call
 		list_continents
 		menu
 	end
 
 	def list_continents
-		puts "Search The Atlas"
-		# list_continents || choose random
-		puts <<-DOC.gsub(/^\s*/, '')
-		1.  Africa
-		2.  Antarctica 
-		3.  Asia
-		4.  Caribbean
-		5.  Central America
-		6.  Europe
-		7.  Middle East
-		8.  North America
-		9.  Oceania
-		10. South America 
+		puts "Search The Atlas!"
+		puts "\n"		
 
-		DOC
+		AtlasObscuraCliApp::Scraper.scrape_continents.each_with_index do |c, index| 
+			puts "#{index+1}.  #{c.name}"
+			self.continents << c     
+		end
 	end
 
+
 	def menu
-		puts "Enter the area you would like to search, list for areas or exit", "\n"
-		input = nil
+		puts "\n"
+		puts "Enter the continent (or number) you would like to search, list to relist, or exit", "\n"
+		input = gets.strip
+		
+
 		while input != "exit"
 			case input = gets.strip
 			when "1"
@@ -58,6 +57,9 @@ class AtlasObscuraCliApp::CLI
 			end
 		end
 	end
+
+	def list_countries(continent)
+
 
 	def goodbye
 		puts "goodbye and good luck"
