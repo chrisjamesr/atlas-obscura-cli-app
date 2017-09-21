@@ -46,6 +46,7 @@ class AtlasObscuraCliApp::Scraper
 		# atlas.each do {|a| Destination.new(a)}
 	end
 
+	# stack level error. recursive code somewhere
 	def self.scrape_destination_info(destination)
 		atlas = Nokogiri::HTML(open(destination.url))
 		ps = atlas.css('body.places #page-content article.place-content').search('p').select do |p|
