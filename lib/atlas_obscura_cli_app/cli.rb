@@ -13,6 +13,7 @@ class AtlasObscuraCliApp::CLI
 		list_countries(self.continent)
 		menu_2
 		list_destinations(self.country)
+		menu_3
 	end
 
 	def list_continents
@@ -70,13 +71,28 @@ class AtlasObscuraCliApp::CLI
 		AtlasObscuraCliApp::Scraper.scrape_destinations(country).each_with_index do |c, index |
 			# binding.pry
 			puts "\n"
-			puts "#{c.name}   -    #{c.city}"
+			puts "#{index+1}.  #{c.name}   -    #{c.city}"
 			puts "\n"
 			puts "#{c.summary}"
 			puts "\n"
 			puts "				***"
 		end
 	end
+
+	def menu_3
+		puts "\n"
+		puts "Enter a number for the destination you would like to see, list to relist, or exit", "\n"
+		input = gets.strip
+		if input.slice(/\A\d*/).strip.to_i.eql?(0) || input.slice(/\A\d*/).strip.to_i > self.countries.count + 1  
+			menu_3
+		elsif input == "exit"
+			goodbye
+		else	
+			index = input.slice(/\A\d*/).strip.to_i - 1
+			self.country = self.countries[index]
+		end
+		puts "\n"
+	end	
 
 	def goodbye
 		puts "goodbye and good luck"
