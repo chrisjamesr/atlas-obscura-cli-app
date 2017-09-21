@@ -22,7 +22,7 @@ class AtlasObscuraCliApp::Scraper
 	end
 
 	def self.scrape_destinations(country)
-		binding.pry
+		# binding.pry
 		info = {name: "", link: "", summary: "", city: "", lat_lng: "", country:"", continent:""}
 		atlas = Nokogiri::HTML(open(country.url))
 		destinations = atlas.css('.geos #page-content .container section.geo-places .index-card-wrap')
@@ -38,9 +38,11 @@ class AtlasObscuraCliApp::Scraper
 					info[:country] = country
 					info[:continent] = country.continent
 				end
+				# binding.pry
 			end
-	
+			# binding.pry
 			Destination.new(info)
+			# binding.pry
 		end
 		# atlas.each do {|a| Destination.new(a)}
 	end

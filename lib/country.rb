@@ -7,7 +7,7 @@ class Country
 		@name = name
 		@continent = continent
 		@cities = []
-		@destinations = {}
+		@destinations = []
 		@@countries << self
 		self.continent.countries << self
 
