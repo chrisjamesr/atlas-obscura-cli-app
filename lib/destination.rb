@@ -1,6 +1,6 @@
 
 class Destination
-	attr_accessor :name, :link, :summary, :lat_lng, :country, :continent, :city
+	attr_accessor :name, :link, :summary, :lat_lng, :country, :continent, :city, :text
 	
 	# {name: "", link: "", summary: "", city: "", lat_lng: "", country: self}
 	@@destinations = []
@@ -13,6 +13,8 @@ class Destination
 		end	
 		@@destinations << self
 		self.country.destinations << self
+		@text = []
+
 	end
 
 	def self.all
@@ -33,6 +35,10 @@ class Destination
 
 	def url
 		@url = "http://www.atlasobscura.com/places/#{self .name.gsub(" ","-").downcase}"
+	end
+
+	def text
+		@text = AtlasObscuraCliApp::Scraper.scrape_destination_info(self)
 	end
 	
 end  # End of Class
