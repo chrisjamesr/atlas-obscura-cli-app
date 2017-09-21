@@ -31,5 +31,8 @@ class Destination
 		@city.sub(", #{self.country.name}", "")
 	end
 
+	def url
+		@url = "http://www.atlasobscura.com/places/#{self .name.gsub(" ","-").downcase}"
+	end
 	
 end  # End of Class
