@@ -54,7 +54,7 @@ class AtlasObscuraCliApp::CLI
 		puts "\n"
 		puts "Enter a number for the region you would like to search, list to relist, or exit", "\n"
 		input = gets.strip
-		if input.slice(/\A\d*/).strip.to_i.eql?(0) || input.slice(/\A\d*/).strip.to_i > self.continents.count + 1  
+		if input.slice(/\A\d*/).strip.to_i.eql?(0) || input.slice(/\A\d*/).strip.to_i > self.countries.count + 1  
 			menu_2
 		else 
 			index = input.slice(/\A\d*/).strip.to_i - 1
@@ -67,9 +67,14 @@ class AtlasObscuraCliApp::CLI
 		# binding.pry
 		puts country.name
 		puts "\n"
-		AtlasObscuraCliApp::Scraper.scrape_destinations(country).each do |key, value|
-			puts "#{key}  #{value}"
-			
+		AtlasObscuraCliApp::Scraper.scrape_destinations(country).each_with_index do |c, index |
+			# binding.pry
+			puts "\n"
+			puts "#{c.name}   -    #{c.city}"
+			puts "\n"
+			puts "#{c.summary}"
+			puts "\n"
+			puts "				***"
 		end
 	end
 
