@@ -28,7 +28,7 @@ class Destination
 	end		
 
 	def city
-		@city.sub("#{country.name}", "")
+		@city.sub(", #{self.country.name}", "")
 	end
 
 	
