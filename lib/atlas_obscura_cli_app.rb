@@ -14,12 +14,15 @@ class AtlasObscuraCliApp::Scraper
 	# returns array of countries
 	def self.scrape_countries(continent)
 		atlas = Nokogiri::HTML(open('http://www.atlasobscura.com/destinations'))
-		atlas.css("ul.global-region-list li.global-region-item div[id^=\"#{continent.name.downcase}\"]").search('a').collect do |c| 
+		# binding.pry
+		atlas.css("ul.global-region-list li.global-region-item div[id^=\"#{continent.name.gsub(" ","-").downcase}\"]").search('a').collect do |c| 
+			# binding.pry
 			Country.new(c.text.strip, continent)
 		end
 	end
 
 	def self.scrape_destinations(country)
+		binding.pry
 		info = {name: "", link: "", summary: "", city: "", lat_lng: "", country:"", continent:""}
 		atlas = Nokogiri::HTML(open(country.url))
 		destinations = atlas.css('.geos #page-content .container section.geo-places .index-card-wrap')
