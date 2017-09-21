@@ -1,6 +1,15 @@
 Atlas Obscura destination scraper
 
 
+separation of concerns
+
+
+scraper scrapes data and creates objects (look into object constructor methods)
+objects store data
+cli -> calls objects for info
+
+Take some time and think this through!
+
 scrape destinations page,
 populate list of continents
 create continents objects
