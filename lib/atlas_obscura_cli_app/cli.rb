@@ -10,16 +10,17 @@ class AtlasObscuraCliApp::CLI
 	def call
 		list_continents
 		menu
-		list_countries(self.continent)
+		list_countries(continent)
 		menu_2
-		list_destinations(self.country)
+		list_destinations(country)
 		menu_3
+		list_destination_info(destination)
 	end
 
 	def list_continents
 		puts "Search The Atlas!"
 		puts "\n"		
-
+		# call Continents.all instead of scraper
 		AtlasObscuraCliApp::Scraper.scrape_continents.each_with_index do |c, index| 
 			puts "#{index+1}.  #{c.name}"
 			self.continents << c     
@@ -45,6 +46,7 @@ class AtlasObscuraCliApp::CLI
 		# binding.pry
 		puts continent.name
 		puts "\n"
+		# call Continents.all instead of scraper
 		AtlasObscuraCliApp::Scraper.scrape_countries(continent).each_with_index do |c, index|
 			puts "#{index+1}.  #{c.name}"
 			self.countries << c 
@@ -68,14 +70,15 @@ class AtlasObscuraCliApp::CLI
 		# binding.pry
 		puts country.name
 		puts "\n"
-		AtlasObscuraCliApp::Scraper.scrape_destinations(country).each_with_index do |c, index |
+		AtlasObscuraCliApp::Scraper.scrape_destinations(country).each_with_index do |d, index |
 			# binding.pry
 			puts "\n"
-			puts "#{index+1}.  #{c.name}   -    #{c.city}"
+			puts "#{index+1}.  #{d.name}   -    #{d.city}"
 			puts "\n"
-			puts "#{c.summary}"
+			puts "#{d.summary}"
 			puts "\n"
 			puts "				***"
+			self.destinations << d
 		end
 	end
 
@@ -89,10 +92,22 @@ class AtlasObscuraCliApp::CLI
 			goodbye
 		else	
 			index = input.slice(/\A\d*/).strip.to_i - 1
-			self.country = self.countries[index]
+			self.destination = self.destinations[index]
 		end
 		puts "\n"
+		list_destination_info(self.destination)
+		puts "\n"
+		puts "Would you like to see another destination? type list or exit", "\n"
+		menu_3
 	end	
+
+	def list_destination_info(destination)
+		binding.pry
+		destination.text.each do |p|
+			puts p
+			puts "\n"
+		end
+	end
 
 	def goodbye
 		puts "goodbye and good luck"
