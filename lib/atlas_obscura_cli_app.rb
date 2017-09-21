@@ -26,10 +26,10 @@ class AtlasObscuraCliApp::Scraper
 		info = {name: "", link: "", summary: "", city: "", lat_lng: "", country:"", continent:""}
 		atlas = Nokogiri::HTML(open(country.url))
 		destinations = atlas.css('.geos #page-content .container section.geo-places .index-card-wrap')
-		destinations.select do |dest|
+		destinations.map do |dest|
 			# binding.pry
 			if !dest.values.include?("index-card-wrap geo-tile-cta")
-				info.each do
+				info.select do
 					info[:name] = dest.search('a h3.content-card-title span').text
 					info[:link] = dest.search('a.content-card-place').attribute('href').value
 					info[:summary] = dest.search('a .content-card-subtitle').text
@@ -38,11 +38,10 @@ class AtlasObscuraCliApp::Scraper
 					info[:country] = country
 					info[:continent] = country.continent
 				end
-				# binding.pry
 			end
-			# binding.pry
+			
 			Destination.new(info)
-			# binding.pry
+
 		end
 		# atlas.each do {|a| Destination.new(a)}
 	end
