@@ -21,6 +21,10 @@ class Country
 		@cities[city.to_sym] = {}
 	end
 
+	def self.create_from_url(continent)
+		AtlasObscuraCliApp::Scraper.scrape_countries(continent)
+	end
+
 	def url
 		@url = "http://www.atlasobscura.com/things-to-do/#{self.name.gsub(" ","-").downcase}/places"
 	end
