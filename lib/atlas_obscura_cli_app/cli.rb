@@ -47,8 +47,10 @@ class AtlasObscuraCliApp::CLI
 		puts continent.name
 		puts "\n"
 		# call Continents.all instead of scraper
-		AtlasObscuraCliApp::Scraper.scrape_countries(continent).each_with_index do |c, index|
+		# AtlasObscuraCliApp::Scraper.scrape_countries(continent).each_with_index do |c, index|
+		Continent.all.each_with_index do |c, index|
 			puts "#{index+1}.  #{c.name}"
+			binding.pry
 			self.countries << c 
 		end
 	end
