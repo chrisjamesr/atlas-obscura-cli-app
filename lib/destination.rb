@@ -17,6 +17,10 @@ class Destination
 
 	end
 
+	def self.create_from_url(country)
+		AtlasObscuraCliApp::Scraper.scrape_destinations(country)
+	end
+
 	def self.all
 		@@destinations
 	end
