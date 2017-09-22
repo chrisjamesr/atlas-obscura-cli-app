@@ -1,5 +1,7 @@
 Atlas Obscura destination scraper
 
+Investigate moving object construction from scraper to create_from ... object class method.
+
 
 separation of concerns
 
