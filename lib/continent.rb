@@ -11,6 +11,10 @@ class Continent
 		@@continents << self
 	end
 
+	def self.create_from_url
+		AtlasObscuraCliApp::Scraper.scrape_continents
+	end
+
 	def self.all
 		@@continents
 	end
