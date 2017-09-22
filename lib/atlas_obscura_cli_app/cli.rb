@@ -71,7 +71,7 @@ class AtlasObscuraCliApp::CLI
 		# binding.pry
 		puts country.name
 		puts "\n"
-		AtlasObscuraCliApp::Scraper.scrape_destinations(country).each_with_index do |d, index |
+		Destination.create_from_url(country).each_with_index do |d, index |
 			# binding.pry
 			puts "\n"
 			puts "#{index+1}.  #{d.name}   -    #{d.city}"
