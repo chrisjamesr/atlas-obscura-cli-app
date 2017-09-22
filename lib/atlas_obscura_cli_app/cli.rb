@@ -20,8 +20,7 @@ class AtlasObscuraCliApp::CLI
 	def list_continents
 		puts "Search The Atlas!"
 		puts "\n"		
-		# call Continents.all instead of scraper
-		AtlasObscuraCliApp::Scraper.scrape_continents.each_with_index do |c, index| 
+			Continent.create_from_url.each_with_index do |c, index|
 			puts "#{index+1}.  #{c.name}"
 			self.continents << c     
 		end
@@ -48,9 +47,9 @@ class AtlasObscuraCliApp::CLI
 		puts "\n"
 		# call Continents.all instead of scraper
 		# AtlasObscuraCliApp::Scraper.scrape_countries(continent).each_with_index do |c, index|
-		Continent.all.each_with_index do |c, index|
+		Country.create_from_url(continent).each_with_index do |c, index|
 			puts "#{index+1}.  #{c.name}"
-			binding.pry
+			# binding.pry
 			self.countries << c 
 		end
 	end
