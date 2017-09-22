@@ -100,7 +100,7 @@ class AtlasObscuraCliApp::CLI
 		puts "Would you like to see another destination? type list or exit", "\n"
 		menu_3
 	end	
-
+	# scraper hasn't been called, destination.text = []
 	def list_destination_info(destination)
 		binding.pry
 		destination.text.each do |p|
