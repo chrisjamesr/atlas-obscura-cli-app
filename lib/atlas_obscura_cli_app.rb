@@ -14,9 +14,7 @@ class AtlasObscuraCliApp::Scraper
 	# returns array of countries
 	def self.scrape_countries(continent)
 		atlas = Nokogiri::HTML(open('http://www.atlasobscura.com/destinations'))
-		# binding.pry
 		atlas.css("ul.global-region-list li.global-region-item div[id^=\"#{continent.name.gsub(" ","-").downcase}\"]").search('a').collect do |c| 
-			# binding.pry
 			Country.new(c.text.strip, continent)
 		end
 	end
@@ -27,7 +25,6 @@ class AtlasObscuraCliApp::Scraper
 		atlas = Nokogiri::HTML(open(country.url))
 		destinations = atlas.css('.geos #page-content .container section.geo-places .index-card-wrap')
 		destinations.map do |dest|
-			# binding.pry
 			if !dest.values.include?("index-card-wrap geo-tile-cta")
 				info.select do
 					info[:name] = dest.search('a h3.content-card-title span').text
@@ -38,21 +35,17 @@ class AtlasObscuraCliApp::Scraper
 					info[:country] = country
 					info[:continent] = country.continent
 				end
-			end
-			
+			end			
 			Destination.new(info)
-			
 		end
-		# atlas.each do {|a| Destination.new(a)}
 	end
 
-	# stack level error. recursive code somewhere
 	def self.scrape_destination_info(destination)
 		atlas = Nokogiri::HTML(open(destination.url))
-		atlas.css('body.places #page-content article.place-content').search('p').select do |p|
-					destination.text	<< p.text
+		info = atlas.css('body.places #page-content article.place-content').search('p')
+		info.each do |p|
+			destination.text << p.text
 		end
-		binding.pry
 	end	
 
 
