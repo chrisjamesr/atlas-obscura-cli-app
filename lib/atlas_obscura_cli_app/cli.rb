@@ -96,19 +96,12 @@ class AtlasObscuraCliApp::CLI
 			self.destination = self.destinations[index]
 		end
 		puts "\n"
-		list_destination_info(self.destination)
+		self.destination.get_text.each {|t| puts t, "\n"}
 		puts "\n"
 		puts "Would you like to see another destination? type list or exit", "\n"
 		menu_3
 	end	
-	# scraper hasn't been called, destination.text = []
-	def list_destination_info(destination)
-		binding.pry
-		destination.text.each do |p|
-			puts p
-			puts "\n"
-		end
-	end
+	
 
 	def goodbye
 		puts "goodbye and good luck"
