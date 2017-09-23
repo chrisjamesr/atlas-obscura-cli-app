@@ -37,8 +37,9 @@ class Destination
 	end
 
 	def url
-		@url = "http://www.atlasobscura.com/places/#{self .name.gsub(" ","-").downcase}"
+		"http://www.atlasobscura.com/#{self.link}"
 	end
+
 
 	def get_text
 		AtlasObscuraCliApp::Scraper.scrape_destination_info(self)
