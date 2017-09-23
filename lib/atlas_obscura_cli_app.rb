@@ -41,6 +41,7 @@ class AtlasObscuraCliApp::Scraper
 	end
 
 	def self.scrape_destination_info(destination)
+		binding.pry
 		atlas = Nokogiri::HTML(open(destination.url))
 		info = atlas.css('body.places #page-content article.place-content').search('p')
 		info.each do |p|
