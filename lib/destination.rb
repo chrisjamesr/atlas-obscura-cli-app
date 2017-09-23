@@ -14,7 +14,6 @@ class Destination
 		@@destinations << self
 		self.country.destinations << self
 		@text = []
-
 	end
 
 	def self.create_from_url(country)
@@ -41,8 +40,13 @@ class Destination
 		@url = "http://www.atlasobscura.com/places/#{self .name.gsub(" ","-").downcase}"
 	end
 
-	def text
-		@text = AtlasObscuraCliApp::Scraper.scrape_destination_info(self)
+	def get_text
+		AtlasObscuraCliApp::Scraper.scrape_destination_info(self)
+		self.text
 	end
 	
+	def text
+		@text
+	end
+
 end  # End of Class
