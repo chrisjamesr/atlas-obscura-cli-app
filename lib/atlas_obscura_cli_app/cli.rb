@@ -96,12 +96,15 @@ class AtlasObscuraCliApp::CLI
 			self.destination = self.destinations[index]
 		end
 		puts "\n"
-		self.destination.get_text.each {|t| puts t, "\n"}
+		destination_info
 		puts "\n"
 		puts "Would you like to see another destination? type list or exit", "\n"
 		menu_3
 	end	
 	
+	def destination_info
+		self.destination.get_text.each {|t| puts t, "\n"}
+	end
 
 	def goodbye
 		puts "goodbye and good luck"
