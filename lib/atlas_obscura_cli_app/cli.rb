@@ -26,7 +26,6 @@ class AtlasObscuraCliApp::CLI
 		end
 	end
 
-	#refactor menu methods for 
 	def menu
 		puts "\n"
 		puts "Enter a number for the region you would like to search, list to relist, or exit", "\n"
@@ -39,7 +38,6 @@ class AtlasObscuraCliApp::CLI
 		end
 		puts "\n"
 	end		
-
 
 	def list_countries(continent)
 		# binding.pry
@@ -97,8 +95,6 @@ class AtlasObscuraCliApp::CLI
 		end
 		puts "\n"
 		destination_info
-		puts "\n"
-		puts "Would you like to see another destination? type list or exit", "\n"
 		menu_3
 	end	
 	

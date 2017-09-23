@@ -29,9 +29,4 @@ class Country
 		@url = "http://www.atlasobscura.com/things-to-do/#{self.name.gsub(" ","-").downcase}/places"
 	end
 
-
-
-
-
-
 end # End of Class

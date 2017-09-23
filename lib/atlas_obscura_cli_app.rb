@@ -19,6 +19,7 @@ class AtlasObscuraCliApp::Scraper
 		end
 	end
 
+	# Returns array of destination objects
 	def self.scrape_destinations(country)
 		# binding.pry
 		info = {name: "", link: "", summary: "", city: "", lat_lng: "", country:"", continent:""}
@@ -40,6 +41,7 @@ class AtlasObscuraCliApp::Scraper
 		end
 	end
 
+	# Returns destination paragraphs as array elements
 	def self.scrape_destination_info(destination)
 		atlas = Nokogiri::HTML(open(destination.url))
 		info = atlas.css('body.places #page-content article.place-content').search('p')
