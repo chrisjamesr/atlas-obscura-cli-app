@@ -87,7 +87,7 @@ class AtlasObscuraCliApp::CLI
 		puts "\n"
 		puts "Enter a number for the destination you would like to see, list to relist, or exit", "\n"
 		input = gets.strip
-		if input.slice(/\A\d*/).strip.to_i.eql?(0) || input.slice(/\A\d*/).strip.to_i > self.countries.count + 1  
+		if input.slice(/\A\d*/).strip.to_i.eql?(0) || input.slice(/\A\d*/).strip.to_i > self.destinations.count + 1  
 			menu_3
 		elsif input == "exit"
 			goodbye
@@ -103,6 +103,8 @@ class AtlasObscuraCliApp::CLI
 	end	
 	
 	def destination_info
+		puts "#{destination.name}  -  #{destination.city}, #{destination.country.name}"
+		puts "\n"
 		self.destination.get_text.each {|t| puts t, "\n"}
 	end
 
