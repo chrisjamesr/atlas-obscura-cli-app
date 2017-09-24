@@ -17,6 +17,10 @@ class Country
 		@@countries
 	end
 
+	def self.clear
+		self.all.clear
+	end
+
 	def add_city(city)
 		@cities[city.to_sym] = {}
 	end

@@ -24,6 +24,10 @@ class Destination
 		@@destinations
 	end
 
+	def self.clear
+		self.all.clear
+	end
+
 	def country_name
 		self.country.name
 	end
@@ -49,5 +53,6 @@ class Destination
 	def text
 		@text
 	end
+
 
 end  # End of Class
