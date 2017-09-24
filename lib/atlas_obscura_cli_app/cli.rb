@@ -8,21 +8,32 @@ class AtlasObscuraCliApp::CLI
 	end
 
 	def call
+		greeting
 		list_continents
 		menu
 		list_countries(continent)
 		menu_2
 		list_destinations(country)
 		menu_3
-		list_destination_info(destination)
+		destination_info
+		continue
 	end
 
-	def list_continents
+	def greeting
 		puts "Search The Atlas!"
 		puts "\n"		
+	end	
+
+	def list_continents
+		if !Continent.all.empty?
+			Continent.all.each_with_index do |c, index|
+				puts "#{index+1}.  #{c.name}"
+			end
+		else 
 			Continent.create_from_url.each_with_index do |c, index|
-			puts "#{index+1}.  #{c.name}"
-			self.continents << c     
+				puts "#{index+1}.  #{c.name}"
+				self.continents << c     
+			end
 		end
 	end
 
@@ -95,7 +106,6 @@ class AtlasObscuraCliApp::CLI
 		end
 		puts "\n"
 		destination_info
-		menu_3
 	end	
 	
 	def destination_info
@@ -109,5 +119,28 @@ class AtlasObscuraCliApp::CLI
 		exit
 	end
 
+	def continue
+		puts "Would you like to continue exploring?"
+		puts "Make another selection"
+		puts "1. Continents"
+		puts "2. Other countries in #{self.continent.name}"
+		puts "3. Other destinations in #{self.country.name}"
+		puts "4. Exit"
+		input = gets.strip		
+		if !["1", "2","3", "exit"].include?(input)	
+			puts "please select a number or exit"
+		else
+			case input 
+			when "1"
+				call
+			when "2"
+				list_countries(self.continent)
+			when "3" 		
+				list_destinations(self.country)
+			when input.downcase == "exit"
+				goodbye
+			end
+		end	
+	end		
 
 end # End of Class 
