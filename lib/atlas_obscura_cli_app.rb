@@ -38,6 +38,7 @@ class AtlasObscuraCliApp::Scraper
 				end
 			end			
 			Destination.new(info) 
+			# If conditional above is !true returns duplicate Destinaion
 		end
 	end
 
