@@ -25,7 +25,7 @@ class AtlasObscuraCliApp::Scraper
 		info = {name: "", link: "", summary: "", city: "", lat_lng: "", country:"", continent:""}
 		atlas = Nokogiri::HTML(open(country.url))
 		destinations = atlas.css('.geos #page-content .container section.geo-places .index-card-wrap')
-		destinations.map do |dest|
+		destinations.collect do |dest|
 			if !dest.values.include?("index-card-wrap geo-tile-cta")
 				info.select do
 					info[:name] = dest.search('a h3.content-card-title span').text
@@ -37,7 +37,7 @@ class AtlasObscuraCliApp::Scraper
 					info[:continent] = country.continent
 				end
 			end			
-			Destination.new(info)
+			Destination.new(info) 
 		end
 	end
 
