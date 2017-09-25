@@ -17,7 +17,7 @@ class Country
 		@@countries
 	end
 
-	def self.clear
+	def self.clear_all
 		self.all.clear
 	end
 
