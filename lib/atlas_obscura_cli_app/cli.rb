@@ -12,13 +12,14 @@ class AtlasObscuraCliApp::CLI
 		greeting
 		list_continents
 		menu
-	  until self.switch == "exit"	
+		switch = self.switch
+	  until switch == "exit"	
 			case self.switch
 			when :countries
-				list_countries(continent)
-			when :destination	
-				list_destinations(country)
-				menu
+				list_countries(self.continent)
+			when :destinations	
+				list_destinations(self.country)
+			when :destination
 				destination_info
 				continue
 			when :continents
@@ -29,13 +30,14 @@ class AtlasObscuraCliApp::CLI
 	end
 
 	def greeting
+		puts "\n"		
 		puts "Search The Atlas!"
 		puts "\n"		
 	end	
 
 	def menu(switch=self.switch)
 	puts "\n"
-	puts "Enter a number for the region you would like to search, list to relist, or exit", "\n"
+	puts "Enter a number for the #{switch.to_s.capitalize} you would like to search, list to relist, or exit", "\n"
 	input = gets.strip
 		if input.downcase == "exit"
 			goodbye
@@ -50,12 +52,15 @@ class AtlasObscuraCliApp::CLI
 			when :continents
 				index = input.to_i - 1
 				self.continent = self.continents[index]
+				self.switch = :countries
 			when :countries	
 				index = input.slice(/\A\d*/).strip.to_i - 1
 				self.country = self.countries[index]
+				self.switch = :destinations
 			when :destinations
 				index = input.slice(/\A\d*/).strip.to_i - 1
 				self.destination = self.destinations[index]	
+				self.switch = :destination				
 			end
 			puts "\n"
 		end	
@@ -109,10 +114,11 @@ class AtlasObscuraCliApp::CLI
 	end
 
 	def goodbye
-		puts "goodbye and good luck"
+		puts "\n"
+		puts "Goodbye and Good luck"
 		sleep(1)	
 		self.switch = "exit"
-
+		exit
 	end
 
 	def continue
@@ -122,6 +128,7 @@ class AtlasObscuraCliApp::CLI
 		puts "2. Other countries in #{self.continent.name}"
 		puts "3. Other destinations in #{self.country.name}"
 		puts "4. Exit"
+		puts "\n"		
 		input = nil
 		while !["1", "2", "3", "4", "exit"].include?(input)	
 			input = gets.strip		
@@ -141,7 +148,6 @@ class AtlasObscuraCliApp::CLI
 				puts "Please select a valid number"	
 			end
 		end	
-		menu
 	end	
 
 
