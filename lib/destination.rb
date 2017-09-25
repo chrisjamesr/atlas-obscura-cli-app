@@ -17,13 +17,19 @@ class Destination
 	end
 
 	def self.create_from_url(country)
-		AtlasObscuraCliApp::Scraper.scrape_destinations(country)
+		AtlasObscuraCliApp::Scraper.scrape_destinations(country).reject do |d|
+			self.destination_names.include?(d.name)
+		end	
 	end
 
 	def self.all
 		@@destinations
 	end
 
+	def self.destination_names
+		self.all.collect {|d| d.name}
+	end
+		
 	def self.clear_all
 		self.all.clear
 	end
