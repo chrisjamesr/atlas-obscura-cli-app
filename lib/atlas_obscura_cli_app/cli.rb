@@ -81,6 +81,7 @@ class AtlasObscuraCliApp::CLI
 	end
 
 	def list_countries(continent=self.continent)
+		clear_countries
 		puts continent.name
 		puts "\n"
 		Country.create_from_url(continent).each_with_index do |c, index|
@@ -91,6 +92,7 @@ class AtlasObscuraCliApp::CLI
 	end
 
 	def list_destinations(country=self.country)
+		clear_destinations
 		# binding.pry
 		puts country.name
 		puts "\n"
@@ -150,7 +152,13 @@ class AtlasObscuraCliApp::CLI
 		end	
 	end	
 
-
+	def clear_countries
+		self.countries.clear
+	end
+	
+	def clear_destinations
+		self.destinations.clear	
+	end	
 	# 	def menu_2
 	# 	puts "\n"
 	# 	puts "Enter a number for the region you would like to search, list to relist, or exit", "\n"
