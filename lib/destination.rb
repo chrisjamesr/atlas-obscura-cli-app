@@ -21,7 +21,7 @@ class Destination
 	# iterate through hashes and find element
 
 	def self.create_from_url(country)
-		AtlasObscuraCliApp::Scraper.scrape_destinations(country)
+		AtlasObscuraCliApp::Scraper.scrape_destinations(country).uniq {|c| c.name}
 	end
 
 	def self.all
