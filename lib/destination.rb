@@ -16,7 +16,9 @@ class Destination
 		@text = []
 	end
 
-
+	#Remove Destination.new from scraper
+	# self.create_returns array of hashes
+	# iterate through hashes and find element
 
 	def self.create_from_url(country)
 		AtlasObscuraCliApp::Scraper.scrape_destinations(country)
