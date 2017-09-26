@@ -65,7 +65,8 @@ class AtlasObscuraCliApp::CLI
 			puts "\n"
 		end	
 	end	
-
+	#relist not working.
+	
 	def list_continents
 		if !Continent.all.empty?
 			Continent.all.each_with_index do |c, index|
@@ -134,20 +135,22 @@ class AtlasObscuraCliApp::CLI
 		input = nil
 		while !["1", "2", "3", "4", "exit"].include?(input)	
 			input = gets.strip		
-			case input 
-			when "1"
-				self.switch = :continents
-				call
-			when "2"
-				self.switch = :countries
-				list_countries(self.continent)
-			when "3" 		
-				self.switch = :destinations
-				list_destinations(self.country)
-			when input.downcase == "exit" || "4"
+			if input.downcase == "exit" || input.downcase == "4"
 				goodbye
-			else 
-				puts "Please select a valid number"	
+			else		
+				case input 
+				when "1"
+					self.switch = :continents
+					call
+				when "2"
+					self.switch = :countries
+					list_countries(self.continent)
+				when "3" 		
+					self.switch = :destinations
+					list_destinations(self.country)
+				else
+					puts "Please enter a valid number"
+				end	
 			end
 		end	
 	end	
@@ -159,35 +162,5 @@ class AtlasObscuraCliApp::CLI
 	def clear_destinations
 		self.destinations.clear	
 	end	
-	# 	def menu_2
-	# 	puts "\n"
-	# 	puts "Enter a number for the region you would like to search, list to relist, or exit", "\n"
-	# 	input = gets.strip
-	# 	if input.slice(/\A\d*/).strip.to_i.eql?(0) || input.slice(/\A\d*/).strip.to_i > self.countries.count + 1  
-	# 		menu_2
-	# 	else 
-	# 		index = input.slice(/\A\d*/).strip.to_i - 1
-	# 		self.country = self.countries[index]
-	# 	end
-	# 	puts "\n"
-	# end
-
-	# def menu_3
-	# 	puts "\n"
-	# 	puts "Enter a number for the destination you would like to see, list to relist, or exit", "\n"
-	# 	input = gets.strip
-	# 	if input.slice(/\A\d*/).strip.to_i.eql?(0) || input.slice(/\A\d*/).strip.to_i > self.destinations.count + 1  
-	# 		menu_3
-	# 	elsif input == "exit"
-	# 		goodbye
-	# 	else	
-	# 		index = input.slice(/\A\d*/).strip.to_i - 1
-	# 		self.destination = self.destinations[index]
-	# 	end
-	# 	puts "\n"
-	# 	destination_info
-	# end	
-	
-	
 
 end # End of Class 
