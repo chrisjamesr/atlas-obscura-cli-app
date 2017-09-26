@@ -30,7 +30,7 @@ class Country
 	end
 
 	def url
-		@url = "http://www.atlasobscura.com/things-to-do/#{self.name.gsub(" ","-").downcase}/places"
+		@url = "http://www.atlasobscura.com/things-to-do/#{self.name.gsub(" ","-").gsub(".","").downcase}/places"
 	end
 
 end # End of Class
