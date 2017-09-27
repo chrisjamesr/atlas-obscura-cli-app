@@ -6,12 +6,10 @@ class Country
 	def initialize(name, continent)
 		@name = name
 		@continent = continent
-		@cities = []
 		@destinations = []
 		@@countries << self
 		self.continent.countries << self
-
-		end
+	end
 
 	def self.all
 		@@countries
@@ -19,10 +17,6 @@ class Country
 
 	def self.clear_all
 		self.all.clear
-	end
-
-	def add_city(city)
-		@cities[city.to_sym] = {}
 	end
 
 	def self.create_from_url(continent)
