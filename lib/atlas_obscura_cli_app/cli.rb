@@ -65,7 +65,6 @@ class AtlasObscuraCliApp::CLI
 			puts "\n"
 		end	
 	end	
-	#relist not working.
 	
 	def list_continents
 		if !Continent.all.empty?
