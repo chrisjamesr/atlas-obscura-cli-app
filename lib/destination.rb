@@ -18,8 +18,8 @@ class Destination
 		AtlasObscuraCliApp::Scraper.scrape_destinations(country).uniq {|c| c.name}
 	end
 
-	def self.all 
-		@@destinations || AtlasObscuraCliApp::Scraper.scrape_destinations(country).uniq {|c| c.name}
+	def self.all
+		@@destinations
 	end
 
 	def self.destination_names
