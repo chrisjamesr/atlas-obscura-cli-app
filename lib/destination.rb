@@ -7,25 +7,19 @@ class Destination
 	
 	def initialize(info_hash)
 		info_hash.each do |key, value| 
-			# binding.pry
 			self.send(("#{key}="), value)
-			# self.send(("#{key}="), value.is_a?(String) ? value : value.name)
 		end	
 		@@destinations << self
 		self.country.destinations << self
 		@text = []
 	end
 
-	#Remove Destination.new from scraper
-	# self.create_returns array of hashes
-	# iterate through hashes and find element
-
 	def self.create_from_url(country)
 		AtlasObscuraCliApp::Scraper.scrape_destinations(country).uniq {|c| c.name}
 	end
 
-	def self.all
-		@@destinations
+	def self.all 
+		@@destinations || AtlasObscuraCliApp::Scraper.scrape_destinations(country).uniq {|c| c.name}
 	end
 
 	def self.destination_names
