@@ -1,8 +1,5 @@
 # AtlasObscuraCliApp
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/atlas_obscura_cli_app`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem is a command line scraper application to view content at atlasobscura.com. The user is given a list of continents, and countries. Within the each country selection is a list of interesting places with a brief summary. Upon selection of a destination, the text content for that particular destination is displayed in the console.  
 
 ## Installation
 
@@ -22,7 +19,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Navigate to a destination by entering the number beside the listed destination. 
 
 ## Development
 
