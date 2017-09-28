@@ -54,11 +54,11 @@ class AtlasObscuraCliApp::CLI
 				self.continent = self.continents[index]
 				self.switch = :countries
 			when :countries	
-				index = input.slice(/\A\d*/).strip.to_i - 1
+				index = input.to_i - 1
 				self.country = self.countries[index]
 				self.switch = :destinations
 			when :destinations
-				index = input.slice(/\A\d*/).strip.to_i - 1
+				index = input.strip.to_i - 1
 				self.destination = self.destinations[index]	
 				self.switch = :destination				
 			end
