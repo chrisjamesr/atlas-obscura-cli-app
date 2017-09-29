@@ -15,12 +15,12 @@ class Continent
 	end
 
 	def self.all
-		@@continents
+		@@continents.empty? ? AtlasObscuraCliApp::Scraper.scrape_continents : @@continents
 	end
 
-	def self.clear
-		self.all.clear
-	end
+	# def self.clear
+	# 	self.all.clear
+	# end
 	
 end # End of Class
 
