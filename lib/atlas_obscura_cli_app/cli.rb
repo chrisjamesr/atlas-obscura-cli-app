@@ -67,15 +67,9 @@ class AtlasObscuraCliApp::CLI
 	end	
 	
 	def list_continents
-		if !Continent.all.empty?
-			Continent.all.each_with_index do |c, index|
-				puts "#{index+1}.  #{c.name}"
-			end
-		else 
-			Continent.create_from_url.each_with_index do |c, index|
-				puts "#{index+1}.  #{c.name}"
-				self.continents << c     
-			end
+		Continent.all.each_with_index do |c, index|
+			puts "#{index+1}.  #{c.name}"
+			self.continents << c     
 		end
 		self.switch = :continents
 	end
