@@ -14,12 +14,12 @@ class Destination
 		@text = []
 	end
 
-	def self.create_from_url(country)
+	def self.create_from_country(country)
 		AtlasObscuraCliApp::Scraper.scrape_destinations(country).uniq {|c| c.name}
 	end
 
-	def self.all
-		@@destinations
+	def self.all(country=nil)
+		@@destinations.empty? ?  self.create_from_country(country) : @@destinations
 	end
 
 	def self.destination_names
