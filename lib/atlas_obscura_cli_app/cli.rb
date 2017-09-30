@@ -8,7 +8,6 @@ class AtlasObscuraCliApp::CLI
 	end
 
 	def call(switch=nil)
-		input = nil
 		greeting
 		list_continents
 		menu
@@ -45,7 +44,7 @@ class AtlasObscuraCliApp::CLI
 			self.send("list_"+"#{switch}")
 			menu
 		elsif 
-			input.to_i == 0 || input.to_i > self.send("#{switch}").count + 1  
+			input.to_i == 0 || input.to_i > self.send("#{switch}").count
 			menu
 		elsif
 			case switch
@@ -154,6 +153,10 @@ class AtlasObscuraCliApp::CLI
 	
 	def clear_destinations
 		self.destinations.clear	
+	end	
+
+	def list(switch)
+		self.send("list_"+"#{switch}")
 	end	
 
 end # End of Class 
