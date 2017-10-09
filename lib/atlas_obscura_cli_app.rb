@@ -37,7 +37,9 @@ class AtlasObscuraCliApp::Scraper
 					info[:continent] = country.continent
 				end
 			end			
-			Destination.new(info) 
+			dest = Destination.new(info) 
+			scrape_destination_info(dest)
+			dest
 			# If conditional above is !true returns duplicate Destinaion
 		end
 	end
