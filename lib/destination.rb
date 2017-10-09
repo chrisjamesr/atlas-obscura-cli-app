@@ -15,7 +15,9 @@ class Destination
 	end
 
 	def self.create_from_country(country)
-		AtlasObscuraCliApp::Scraper.scrape_destinations(country).uniq {|c| c.name}
+		AtlasObscuraCliApp::Scraper.scrape_destinations(country).uniq do |c| 
+		c.name
+		end	
 	end
 
 	def self.all(country=nil)
@@ -46,7 +48,6 @@ class Destination
 		"http://www.atlasobscura.com/#{self.link}"
 	end
 
-
 	def get_text
 		AtlasObscuraCliApp::Scraper.scrape_destination_info(self)
 		self.text
@@ -55,6 +56,13 @@ class Destination
 	def text
 		@text
 	end
+
+
+	def self.search_summary(keyword)
+			#return an array of all the destinations that have the keyword in its summary
+		Destination.all.select {|dest| dest.summary.include?(keyword)}	
+		
+	end	
 
 
 end  # End of Class
